@@ -1,7 +1,6 @@
 services:
   drupal:
-    build: .
-    image: drupal-custom
+    image: drupal:9
     ports:
       - "8080:80"
     volumes:
@@ -9,19 +8,13 @@ services:
       - drupal-profiles:/var/www/html/profiles
       - drupal-sites:/var/www/html/sites
       - drupal-themes:/var/www/html/themes
-  mariadb:
-    image: mariadb:10.6
+  postgres:
+    image: postgres:14
     environment:
-      - MARIADB_ROOT_PASSWORD=password
-      - MARIADB_DATABASE=drupal
-      - MARIADB_USER=drupal
-      - MARIADB_PASSWORD=password
-    volumes:
-      - drupal-data:/var/lib/mysql
+      - POSTGRES_PASSWORD=password
 
 volumes:
   drupal-modules:
   drupal-profiles:
   drupal-sites:
   drupal-themes:
-  drupal-data:
